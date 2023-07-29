@@ -29,8 +29,6 @@ public class CountingBloomFilter extends Filter {
     }
 
     int[] h = hash.hash(key);
-    hash.clear();
-
     inc(h);
   }
 
@@ -60,12 +58,11 @@ public class CountingBloomFilter extends Filter {
     if(key == null) {
       throw new NullPointerException("Key may not be null");
     }
-    if(!exists(key)) {
+    if(!this.mayExists(key)) {
       throw new IllegalArgumentException("Key is not a member");
     }
 
     int[] h = hash.hash(key);
-    hash.clear();
 
     for(int i = 0; i < numberOfHashes; i++) {
       // find the bucket
@@ -85,13 +82,12 @@ public class CountingBloomFilter extends Filter {
 
 
   @Override
-  public boolean exists(Key key) {
+  public boolean mayExists(Key key) {
     if(key == null) {
       throw new NullPointerException("Key may not be null");
     }
 
     int[] h = hash.hash(key);
-    hash.clear();
 
     for(int i = 0; i < numberOfHashes; i++) {
       // find the bucket
@@ -111,7 +107,6 @@ public class CountingBloomFilter extends Filter {
   public int approximateCount(Key key) {
     int res = Integer.MAX_VALUE;
     int[] h = hash.hash(key);
-    hash.clear();
     for (int i = 0; i < numberOfHashes; i++) {
       // find the bucket
       int wordNum = h[i] >> 4;          // div 16

@@ -40,7 +40,6 @@ public class BloomFilter extends Filter {
     }
 
     int[] h = hash.hash(key);
-    hash.clear();
 
     for(int i = 0; i < numberOfHashes; i++) {
       bits.set(h[i]);
@@ -72,13 +71,12 @@ public class BloomFilter extends Filter {
   }
 
   @Override
-  public boolean exists(Key key) {
+  public boolean mayExists(Key key) {
     if(key == null) {
       throw new NullPointerException("key cannot be null");
     }
 
     int[] h = hash.hash(key);
-    hash.clear();
     for(int i = 0; i < numberOfHashes; i++) {
       if(!bits.get(h[i])) {
         return false;

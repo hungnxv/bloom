@@ -29,7 +29,7 @@ public abstract class Filter implements Filterable<Key> {
 
   public abstract void add(Key key);
 
-  public abstract boolean exists(Key key);
+  public abstract boolean mayExists(Key key);
 
 
   public void add(Collection<Key> keys){

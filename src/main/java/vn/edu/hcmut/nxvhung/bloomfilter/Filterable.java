@@ -8,6 +8,6 @@ public interface Filterable<T> {
 
   void delete(T element);
 
-  boolean exists(T element);
+  boolean mayExists(T element);
 
 }
