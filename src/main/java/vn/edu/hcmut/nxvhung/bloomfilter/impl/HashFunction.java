@@ -45,7 +45,6 @@
 package vn.edu.hcmut.nxvhung.bloomfilter.impl;
 
 
-import java.nio.ByteBuffer;
 import vn.edu.hcmut.nxvhung.bloomfilter.hash.Hash;
 
 public final class HashFunction {
@@ -89,7 +88,7 @@ public final class HashFunction {
     return result;
   }
 
-  public int hashSingleKey(int value) {
-    return hashFunction.hash(ByteBuffer.allocate(4).putInt(value).array());
+  public int hashSingleKey(byte[] bytes) {
+    return hashFunction.hash(bytes);
   }
 }
