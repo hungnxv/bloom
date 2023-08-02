@@ -1,12 +1,15 @@
 package vn.edu.hcmut.nxvhung.bloomfilter.impl;
 
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 import vn.edu.hcmut.nxvhung.bloomfilter.Filterable;
 
-public class MergeableCountingBloomFilter extends Filter {
+public class MergeableCountingBloomFilter extends Filter implements Serializable {
+
+  private static final long serialVersionUID = 2346766574523341240L;
 
   private List<BitSet> bitSetList;
   private BitSet orBitSet;

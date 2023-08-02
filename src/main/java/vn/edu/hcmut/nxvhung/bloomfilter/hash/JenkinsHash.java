@@ -2,7 +2,12 @@ package vn.edu.hcmut.nxvhung.bloomfilter.hash;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-public class JenkinsHash extends Hash {
+import java.io.Serializable;
+
+public class JenkinsHash extends Hash implements Serializable {
+
+  private static final long serialVersionUID = -2346766574523341240L;
+
   private static long INT_MASK  = 0x00000000ffffffffL;
   private static long BYTE_MASK = 0x00000000000000ffL;
 

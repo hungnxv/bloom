@@ -1,6 +1,10 @@
 package vn.edu.hcmut.nxvhung.bloomfilter.hash;
 
-public class MurmurHash extends Hash {
+import java.io.Serializable;
+
+public class MurmurHash extends Hash implements Serializable {
+  private static final long serialVersionUID = -2346766574523341240L;
+
   private static MurmurHash _instance = new MurmurHash();
 
   public static Hash getInstance() {

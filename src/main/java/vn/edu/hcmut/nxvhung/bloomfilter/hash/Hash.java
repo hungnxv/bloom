@@ -1,5 +1,10 @@
 package vn.edu.hcmut.nxvhung.bloomfilter.hash;
-public abstract class Hash {
+
+import java.io.Serializable;
+
+public abstract class Hash implements Serializable {
+  private static final long serialVersionUID = -2346766574523341240L;
+
   public static final int INVALID_HASH = -1;
   public static final int JENKINS_HASH = 0;
   public static final int MURMUR_HASH  = 1;

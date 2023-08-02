@@ -3,12 +3,13 @@ package vn.edu.hcmut.nxvhung.bloomfilter.impl;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Collection;
 import vn.edu.hcmut.nxvhung.bloomfilter.Filterable;
 import vn.edu.hcmut.nxvhung.bloomfilter.hash.Hash;
 
-public abstract class Filter implements Filterable<Key> {
-
+public abstract class Filter implements Filterable<Key>, Serializable {
+  private static final long serialVersionUID = 2346766574523341240L;
   private static final int VERSION = -1;
   protected int vectorSize;
 
