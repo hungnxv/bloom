@@ -45,9 +45,13 @@
 package vn.edu.hcmut.nxvhung.bloomfilter.impl;
 
 
+import java.io.Serializable;
 import vn.edu.hcmut.nxvhung.bloomfilter.hash.Hash;
 
-public final class HashFunction {
+public final class HashFunction implements Serializable {
+
+  private static final long serialVersionUID = -2346766574523341240L;
+
 
   private int nbHash;
 
