@@ -7,15 +7,15 @@ public class Message implements Serializable {
   private static final long serialVersionUID = 1232L;
   private Integer localTimestamp;
 
-  private Filterable filterable;
+  private Filterable blacklist;
 
   public Message() {
 
   }
 
-  public Message(Integer localTimestamp, Filterable filterable) {
+  public Message(Integer localTimestamp, Filterable blacklist) {
     this.localTimestamp = localTimestamp;
-    this.filterable = filterable;
+    this.blacklist = blacklist;
   }
 
   public Integer getLocalTimestamp() {
@@ -26,11 +26,11 @@ public class Message implements Serializable {
     this.localTimestamp = localTimestamp;
   }
 
-  public Filterable getFilterable() {
-    return filterable;
+  public Filterable getBlacklist() {
+    return blacklist;
   }
 
-  public void setFilterable(Filterable filterable) {
-    this.filterable = filterable;
+  public void setBlacklist(Filterable blacklist) {
+    this.blacklist = blacklist;
   }
 }
