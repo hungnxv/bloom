@@ -5,7 +5,7 @@ import vn.edu.hcmut.nxvhung.bloomfilter.Filterable;
 
 public class Message implements Serializable {
   private static final long serialVersionUID = 1232L;
-  private Integer localTimestamp;
+  private Integer timestamp;
 
   private Filterable blacklist;
 
@@ -13,17 +13,17 @@ public class Message implements Serializable {
 
   }
 
-  public Message(Integer localTimestamp, Filterable blacklist) {
-    this.localTimestamp = localTimestamp;
+  public Message(Integer timestamp, Filterable blacklist) {
+    this.timestamp = timestamp;
     this.blacklist = blacklist;
   }
 
-  public Integer getLocalTimestamp() {
-    return localTimestamp;
+  public Integer getTimestamp() {
+    return timestamp;
   }
 
-  public void setLocalTimestamp(Integer localTimestamp) {
-    this.localTimestamp = localTimestamp;
+  public void setTimestamp(Integer timestamp) {
+    this.timestamp = timestamp;
   }
 
   public Filterable getBlacklist() {
