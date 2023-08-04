@@ -92,14 +92,13 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
   }
 
   private int virtualCuckoo(int index, int bitPosition) {
-    int count = 0;
-    while (++count < Math.pow(2, numberOfBits) - 1) {
-      int current = hash(index);
+    int current = hash(index);
+    while (true) {
+      current = hash(current);
       if (!bitSetList.get(current).get(bitPosition)) {
         return current;
       }
     }
-    return -1;
 
   }
 

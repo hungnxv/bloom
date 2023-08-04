@@ -7,6 +7,8 @@ public class Message implements Serializable {
   private static final long serialVersionUID = 1232L;
   private Integer timestamp;
 
+  private String companyName;
+
   private Filterable blacklist;
 
   public Message() {
@@ -32,5 +34,13 @@ public class Message implements Serializable {
 
   public void setBlacklist(Filterable blacklist) {
     this.blacklist = blacklist;
+  }
+
+  public String getCompanyName() {
+    return companyName;
+  }
+
+  public void setCompanyName(String companyName) {
+    this.companyName = companyName;
   }
 }
