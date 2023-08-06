@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
+import java.util.Random;
 import vn.edu.hcmut.nxvhung.bloomfilter.Filterable;
 
 public class MergeableCountingBloomFilter extends Filter implements Serializable {
@@ -21,7 +22,7 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
 
     this.sizeOfBitset = (int) Math.pow(2, numberOfBits) - 1;
     bitSetList = new ArrayList<>(sizeOfBitset);
-    for (int i = 0; i < sizeOfBitset - 1; i++) {
+    for (int i = 0; i < sizeOfBitset; i++) {
       bitSetList.add(new BitSet(vectorSize));
     }
     this.numberOfBits = numberOfBits;
@@ -73,15 +74,16 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
   }
 
   protected void inc(int[] h) {
-
+    int currentIndex = hash(Integer.valueOf(0), sizeOfBitset, 2);
     for (int i = 0; i < numberOfHashes; i++) {
-      int currentIndex = 0;
+
       // find the bucket
       if (bitSetList.get(currentIndex).get(h[i])) {
         //find another bucket
         currentIndex = virtualCuckoo(currentIndex, h[i]);
         if(currentIndex < 0) {
-          throw new RuntimeException("The Filter is full");
+          System.out.println("Skip ");
+//          throw new RuntimeException("The Filter is full");
         }
         bitSetList.get(currentIndex).set(h[i]);
       } else {
@@ -92,18 +94,33 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
   }
 
   private int virtualCuckoo(int index, int bitPosition) {
-    int current = hash(index);
-    while (true) {
-      current = hash(current);
+    Integer current = index;
+    int count = 0;
+    while (count < sizeOfBitset) {
+      current = hash(current, sizeOfBitset, 3);
+      count++;
       if (!bitSetList.get(current).get(bitPosition)) {
         return current;
       }
     }
-
+    return -1;
   }
 
-  private int hash(int value) {
-    return hash.hashSingleKey(ByteBuffer.allocate(4).putInt(value).array()) % numberOfBits;
+  private static final Random random = new Random();
+
+  public int hash(Object key, int limit, int rounds) {
+    random.setSeed(key.hashCode());
+    int h = random.nextInt(limit);
+    for (int i = 1; i < rounds; i++) {
+      h = random.nextInt(limit);
+    }
+
+    return h;
+  }
+  private int hash(Object object) {
+    int h = object.hashCode();
+    int hash = h ^= (h >>> 20) ^ (h >>> 12);
+    return hash & sizeOfBitset;
   }
 
   public void delete(Key key) {
@@ -162,4 +179,7 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
 
     return res.toString();
   }
+
+
+
 }
