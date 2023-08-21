@@ -83,6 +83,7 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
         currentIndex = virtualCuckoo(currentIndex, h[i]);
         if(currentIndex < 0) {
           System.out.println("Skip ");
+          return;
 //          throw new RuntimeException("The Filter is full");
         }
         bitSetList.get(currentIndex).set(h[i]);
@@ -181,5 +182,13 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
   }
 
 
+  @Override
+  public Object clone() throws CloneNotSupportedException {
+    MergeableCountingBloomFilter mergeableCountingBloomFilter = (MergeableCountingBloomFilter) super.clone();
+    mergeableCountingBloomFilter.bitSetList = new ArrayList<>(bitSetList.size());
+    bitSetList.forEach(bitSet -> mergeableCountingBloomFilter.bitSetList.add((BitSet) bitSet.clone()));
+    mergeableCountingBloomFilter.orBitSet = (BitSet) this.orBitSet.clone();
+    return mergeableCountingBloomFilter;
+  }
 
 }

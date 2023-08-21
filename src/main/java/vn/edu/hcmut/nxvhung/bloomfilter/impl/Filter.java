@@ -63,4 +63,9 @@ public abstract class Filter implements Filterable<Key>, Serializable {
     this.vectorSize = in.readInt();
     this.hash = new HashFunction(this.vectorSize, this.numberOfHashes, this.hashType);
   }
+
+  @Override
+  public Object clone() throws CloneNotSupportedException{
+    return  super.clone();
+  }
 }//end class

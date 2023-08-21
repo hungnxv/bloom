@@ -1,6 +1,6 @@
 package vn.edu.hcmut.nxvhung.bloomfilter;
 
-public interface Filterable<T> {
+public interface Filterable<T> extends Cloneable{
 
   void add(T element);
 
@@ -9,5 +9,7 @@ public interface Filterable<T> {
   void delete(T element);
 
   boolean mayExists(T element);
+
+  Object clone() throws CloneNotSupportedException;
 
 }
