@@ -24,7 +24,7 @@ public class Main {
 //    System.out.println("key gone after deletion: " +  cbf.mayExists(key));
 
     Key key = Key.of("0979561151");
-    MergeableCountingBloomFilter mergeableCountingBloomFilter = new MergeableCountingBloomFilter(10, 2, Hash.MURMUR_HASH, 4);
+    MergeableCountingBloomFilter mergeableCountingBloomFilter = new MergeableCountingBloomFilter(863, 10, Hash.MURMUR_HASH, 4);
     System.out.println("key present after insertion " +  mergeableCountingBloomFilter.mayExists(key));
 
     mergeableCountingBloomFilter.add(key);
@@ -40,7 +40,16 @@ public class Main {
 
     Key key4 = Key.of("0979561123");
     mergeableCountingBloomFilter.add(key4);
+
+    for(int i = 0; i < 50; i++){
+      mergeableCountingBloomFilter.add(Key.of(String.format("092956112%d", i)));
+    }
     System.out.println("key present after insertion " +  mergeableCountingBloomFilter.mayExists(key));
+
+    mergeableCountingBloomFilter.delete(key4);
+
+    System.out.println("key present after insertion " +  mergeableCountingBloomFilter.mayExists(key4));
+
 
 
   }

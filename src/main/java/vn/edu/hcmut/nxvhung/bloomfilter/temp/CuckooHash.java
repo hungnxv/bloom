@@ -1,6 +1,8 @@
 package vn.edu.hcmut.nxvhung.bloomfilter.temp;
 
 import java.util.Arrays;
+import vn.edu.hcmut.nxvhung.bloomfilter.hash.Hash;
+import vn.edu.hcmut.nxvhung.bloomfilter.impl.MergeableCountingBloomFilter;
 
 public class CuckooHash<K, V> {
   private static final int DEFAULT_CAPACITY = 10;
@@ -128,5 +130,13 @@ public class CuckooHash<K, V> {
     cuckooHash.insert("6");
     cuckooHash.insert("8");
     cuckooHash.insert("9");
+    MergeableCountingBloomFilter mergeableCountingBloomFilter= new MergeableCountingBloomFilter(1000,3, Hash.MURMUR_HASH, 4);
+//    mergeableCountingBloomFilter.ad("a");
+//    mergeableCountingBloomFilter.insert("b");
+//    mergeableCountingBloomFilter.insert("c");
+//    cuckooHash.insert("3");
+//    cuckooHash.insert("6");
+//    cuckooHash.insert("8");
+//    cuckooHash.insert("9");
   }
 }
