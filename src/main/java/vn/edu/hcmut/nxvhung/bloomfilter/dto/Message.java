@@ -43,4 +43,11 @@ public class Message implements Serializable {
   public void setCompanyName(String companyName) {
     this.companyName = companyName;
   }
+
+  @Override
+  public String toString() {
+    return "Message{" +
+        "timestamp=" + timestamp +
+        ", companyName='" + companyName ;
+  }
 }

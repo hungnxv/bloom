@@ -62,15 +62,14 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
             || other.sizeOfBitset != this.sizeOfBitset) {
       throw new IllegalArgumentException("filters cannot be merged");
     }
-    MergeableCountingBloomFilter mergedCBF = new MergeableCountingBloomFilter(this.vectorSize, numberOfHashes, hashType, numberOfBits);
 
     for (int i = 0; i < sizeOfBitset; i++) {
-      BitSet mergedBitset = mergedCBF.bitSetList.get(i);
+      BitSet mergedBitset = this.bitSetList.get(i);
       mergedBitset.or(other.bitSetList.get(i));
       mergedBitset.or(this.bitSetList.get(i));
     }
-    mergedCBF.recalculateOrbit();
-    return mergedCBF;
+    this.recalculateOrbit();
+    return this;
   }
 
   protected void inc(int[] h) {
@@ -166,9 +165,11 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
     int[] h = hash.hash(key);
 
     for (int index: h) {
+      int hash = hash(index);
       if(!orBitSet.get(index)) {
         return false;
       }
+
     }
 
     return true;
@@ -195,6 +196,10 @@ public class MergeableCountingBloomFilter extends Filter implements Serializable
     bitSetList.forEach(bitSet -> mergeableCountingBloomFilter.bitSetList.add((BitSet) bitSet.clone()));
     mergeableCountingBloomFilter.orBitSet = (BitSet) this.orBitSet.clone();
     return mergeableCountingBloomFilter;
+  }
+
+  public MergeableCountingBloomFilter copySetting() {
+    return new MergeableCountingBloomFilter(vectorSize, numberOfHashes, hashType, numberOfBits);
   }
 
 }

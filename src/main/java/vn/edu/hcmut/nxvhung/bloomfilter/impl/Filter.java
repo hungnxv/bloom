@@ -68,4 +68,16 @@ public abstract class Filter implements Filterable<Key>, Serializable {
   public Object clone() throws CloneNotSupportedException{
     return  super.clone();
   }
+
+  public int getVectorSize() {
+    return vectorSize;
+  }
+
+  public int getNumberOfHashes() {
+    return numberOfHashes;
+  }
+
+  public int getHashType() {
+    return hashType;
+  }
 }//end class
