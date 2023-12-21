@@ -1,15 +1,20 @@
 package vn.edu.hcmut.nxvhung.bloomfilter.dto;
 
 import java.io.Serializable;
+import java.util.Map;
 import vn.edu.hcmut.nxvhung.bloomfilter.Filterable;
 
 public class Message implements Serializable {
   private static final long serialVersionUID = 1232L;
+
+  private static final String TO_STRING_TEMPLATE = "Message{companyName= %s, timestamp = %s, Vector clock [%s]}";
   private Integer timestamp;
 
   private String companyName;
 
   private Filterable blacklist;
+
+  private Map<String, Integer> timestampVector;
 
   public Message() {
 
@@ -18,6 +23,12 @@ public class Message implements Serializable {
   public Message(Integer timestamp, Filterable blacklist) {
     this.timestamp = timestamp;
     this.blacklist = blacklist;
+  }
+
+  public Message(Integer timestamp, Filterable blacklist, Map<String, Integer> timestampVector) {
+    this.timestamp = timestamp;
+    this.blacklist = blacklist;
+    this.timestampVector = timestampVector;
   }
 
   public Integer getTimestamp() {
@@ -46,8 +57,8 @@ public class Message implements Serializable {
 
   @Override
   public String toString() {
-    return "Message{" +
-        "timestamp=" + timestamp +
-        ", companyName='" + companyName ;
+    return String.format(TO_STRING_TEMPLATE, companyName, timestamp, timestampVector) ;
   }
+
+
 }
